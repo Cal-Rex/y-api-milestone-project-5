@@ -1,39 +1,98 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Y - API
+## Made with Django Rest
 
-Welcome,
+## Table of Contents
+1. [INTRODUCTION](#introduction)
+2. [DESIGN](#design)
+3. [FEATURES](#features)
+- [Design Features](#design-features)
+- [404 and 500 Features](#404-and-500-error-pages)
+- [Features to Implement in Future](#features-to-implement-in-future)
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+4. [BUGS](#bugs)
+- [Resolved Bugs](#resolved-bugs)
+- [Unresolved Bugs](#unresolved-bugs)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **July 26th, 2023**
+5. [TECHNOLOGIES](#technologies)
+- [Languages Used](#languages-used)
+- [Frameworks](#frameworks--libraries--programs)
+- [Libraries](#frameworks--libraries--programs)
+- [Programs](#frameworks--libraries--programs)
 
-## Codeanywhere Reminders
+6. [TESTING](testing.md)
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+Contained as a seperate document [here](testing.md)
 
-`python3 -m http.server`
+7. [DEPLOYMENT](#deployment)
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+Step-by-step guide on how to deploy
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+8. [CREDITS](#credits)
 
-`http_server`
+9. [ACKNOWLEDGEMENTS](#acknolwedgments)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+___
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+# Introduction
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+"Y" is a satirical copy of a recently rebranded social media site. The site will allow users to post public questions or images, and ask the opinions of other authenticated users. Users can then vote on their favourite response. The response with the most votes will be deemed the "Right answer"
 
-To log into the Heroku toolbelt CLI:
+This project houses the API for the front-end of the site developed in react. [check out the front-end repo here](https://github.com/Cal-Rex/y-react-milestone-project-5)
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+<br>
+___
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+# Design
 
----
+## Data models
 
-Happy coding!
+#### **Profile**
+| field | type |
+|-:|:-|
+|date_created| DateTimeField(auto_now_add) |
+|date_updated| DateTimeField(auto_now) |
+|owner| OneToOneField(User) |
+|image| ImageField |
+|display_name| CharField |
+|bio| TextField |
+
+#### **Post**
+| field | type |
+|-:|:-|
+|date_created| DateTimeField(auto_now_add) |
+|date_updated| DateTimeField(auto_now) |
+|owner| ForeignKey(User) |
+|image| ImageField |
+|title| CharField|
+|content| TextField |
+
+#### **Comment**
+| field | type |
+|-:|:-|
+|date_created| DateTimeField(auto_now_add) |
+|date_updated| DateTimeField(auto_now) |
+|owner| ForeignKey(User) |
+|post| ForeignKey(Post) |
+|content| TextField |
+
+#### **Follow**
+| field | type |
+|-:|:-|
+|date_created| DateTimeField(auto_now_add) |
+|owner| ForeignKey(User) |
+|followed| ForeignKey(User) |
+
+#### **Like**
+| field | type |
+|-:|:-|
+|date_created| DateTimeField(auto_now_add) |
+|owner| ForeignKey(User) |
+|post| ForeignKey(Post) |
+
+#### **Vote**
+| field | type |
+|-:|:-|
+|date_created| DateTimeField(auto_now_add) |
+|owner| ForeignKey(User) |
+|comment| ForeignKey(Comment) |
+
