@@ -10,7 +10,7 @@ class LikeList(generics.ListCreateAPIView):
     List all of the likes that have been
     made on posts.
     see what post was liked and who owns
-    the liks
+    the likes
     """
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
