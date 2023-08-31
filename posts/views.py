@@ -8,9 +8,12 @@ from .serializers import PostSerializer
 
 # Create your views here.
 
-class PostList(generics.ListAPIView):
+class PostList(generics.ListCreateAPIView):
     """
     List all profiles.
     """
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
