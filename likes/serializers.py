@@ -1,14 +1,13 @@
 from rest_framework import serializers
 from django.db import IntegrityError
-from .models import Follow
+from .models import Like
 
 
-class FollowSerializer(serializers.ModelSerializer):
+class LikeSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     owner_image = serializers.ReadOnlyField(source='owner.image.url')
-    followed_user_id = serializers.ReadOnlyField(source='followed.id')
-    followed_user_image = serializers.ReadOnlyField(source='followed.image.url')
+    post_id = serializers.ReadOnlyField(source='post.id')
     is_owner = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
@@ -20,24 +19,23 @@ class FollowSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
     
-    def create(self, new_follow):
+    def create(self, validate_like):
         try:
-            return super().create(new_follow)
+            return super().create(validate_like)
         except IntegrityError:
             raise serializers.ValidationError({
-                'detail': "IT'S POSSIBLE THIS FOLLOW PAIRING ALREADY EXISTS"
+                'detail': "IT'S POSSIBLE THIS USER ALREADY LIKES THIS POST"
             })
 
     class Meta:
-        model = Follow
+        model = Like
         fields = [
             'id',
             'date_created',
+            'post',
+            'post_id',
             'owner',
             'owner_id',
             'owner_image',
-            'followed',
-            'followed_user_id',
-            'followed_user_image',
             'is_owner',
         ]

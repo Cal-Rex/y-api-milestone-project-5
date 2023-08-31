@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import UniqueConstraint
 from django.contrib.auth.models import User
-from profiles.models import Profile
 
 
 class Follow(models.Model):
