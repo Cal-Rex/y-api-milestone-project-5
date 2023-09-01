@@ -7,7 +7,7 @@ class VoteSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     owner_image = serializers.ReadOnlyField(source='owner.image.url')
-    post = serializers.ReadOnlyField(source='comment.post')
+    post = serializers.ReadOnlyField(source='comment.post.id')
     is_owner = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
