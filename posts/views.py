@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics
+from rest_framework import generics, filters
+from django.db.models import Count
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Post
@@ -13,7 +14,12 @@ class PostList(generics.ListCreateAPIView):
     and, create a post
     """
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.annotate(
+        likes_count = Count('liked_post', distinct=True),
+        comments_count = Count('parent_post', distinct=True),
+    ).order_by('-date_created')
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['likes_count', 'comments_count']
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

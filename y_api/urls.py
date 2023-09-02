@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# from .views import root_route, logout_route
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('dj-rest-auth/logout/', logout_route),
     path('', include('profiles.urls')),
     path('', include('posts.urls')),
     path('', include('comments.urls')),
