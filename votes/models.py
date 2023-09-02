@@ -8,7 +8,7 @@ from comments.models import Comment
 class Vote(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="parent_comment")
 
     class Meta:
         ordering = ['-date_created']

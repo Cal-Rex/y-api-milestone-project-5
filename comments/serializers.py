@@ -6,6 +6,7 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.id')
     profile_image = serializers.ReadOnlyField(source='owner.image.url')
     post_title = serializers.ReadOnlyField(source='post.title')
+    votes_count = serializers.ReadOnlyField()
     is_owner = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
@@ -29,5 +30,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'post',
             'post_title',
             'content',
+            'votes_count',
             'is_owner',
         ]
