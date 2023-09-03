@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from .models import Comment
+from votes.models import Vote
 
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.id')
     profile_image = serializers.ReadOnlyField(source='owner.image.url')
     post_title = serializers.ReadOnlyField(source='post.title')
+    voted_on_user_id = serializers.SerializerMethodField()
     votes_count = serializers.ReadOnlyField()
     is_owner = serializers.SerializerMethodField()
 
@@ -17,6 +19,14 @@ class CommentSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_voted_on_user_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            voted = Vote.objects.filter(owner=user, comment=obj).first()
+            if voted:
+                return voted.id
+            else: None
     
     def create(self, validate_comment):
         try:
@@ -38,6 +48,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'post',
             'post_title',
             'content',
+            'voted_on_user_id',
             'votes_count',
             'is_owner',
         ]
