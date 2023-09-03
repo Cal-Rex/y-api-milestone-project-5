@@ -7,7 +7,7 @@ class FollowSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     owner_image = serializers.ReadOnlyField(source='owner.image.url')
-    followed_user_id = serializers.ReadOnlyField(source='followed.id')
+    followed_username = serializers.ReadOnlyField(source='followed.username')
     followed_user_image = serializers.ReadOnlyField(source='followed.image.url')
     is_owner = serializers.SerializerMethodField()
 
@@ -37,7 +37,7 @@ class FollowSerializer(serializers.ModelSerializer):
             'owner_id',
             'owner_image',
             'followed',
-            'followed_user_id',
+            'followed_username',
             'followed_user_image',
             'is_owner',
         ]
