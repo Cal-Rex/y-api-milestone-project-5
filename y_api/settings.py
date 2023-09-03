@@ -35,7 +35,7 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     '8000-calrex-yapimilestonepro-z23jn325lep.ws-eu104.gitpod.io', 
-    os.environ.get('ALLOWED_HOST')
+    'y-api-milestone-project-5-3530384cc0f8.herokuapp.com'
 ]
 
 
