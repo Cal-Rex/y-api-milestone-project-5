@@ -7,7 +7,7 @@ class PostSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.id')
     profile_image = serializers.ReadOnlyField(source='owner.image.url')
     is_owner = serializers.SerializerMethodField()
-    liked_by_user_id = serializers.SerializerMethodField()
+    liked_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
 
@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
     
-    def get_liked_by_user_id(self, obj):
+    def get_liked_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
             liked = Like.objects.filter(owner=user, post=obj).first()
@@ -49,7 +49,7 @@ class PostSerializer(serializers.ModelSerializer):
             'content',
             'image',
             'is_owner',
-            'liked_by_user_id',
+            'liked_id',
             'likes_count',
             'comments_count'
         ]
