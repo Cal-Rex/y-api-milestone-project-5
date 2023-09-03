@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters
+from rest_framework import generics, filters, permissions
 from django.db.models import Count
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +15,7 @@ class PostList(generics.ListCreateAPIView):
     filter posts
     and, create a post
     """
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.annotate(
         likes_count = Count('liked_post', distinct=True),
