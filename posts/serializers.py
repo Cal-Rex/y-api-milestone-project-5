@@ -28,7 +28,6 @@ class PostSerializer(serializers.ModelSerializer):
                 return liked.id
             else: None
 
-    
     def create(self, validate_post):
         try:
             return super().create(validate_post)
