@@ -80,6 +80,12 @@ JWT_AUTH_SECURE = True
 JWT_AUTH_COOKIE = 'y-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'y-refresh-token'
 
+# alter the user detail serializer to use
+# additional custom fields.
+REST_AUTH_SERIALIZERS = {
+            'USER_DETAILS_SERIALIZER': 'y_api.serializers.CurrentUserSerializer'
+        }
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
