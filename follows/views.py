@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Follow
 from .serializers import FollowSerializer
+from y_api.permissions import IsOwnerOrReadOnly
 
 
 class FollowList(generics.ListCreateAPIView):
@@ -18,3 +19,9 @@ class FollowList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class FollowDetail(generics.RetrieveDestroyAPIView):
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = FollowSerializer
+    queryset = Follow.objects.all()
