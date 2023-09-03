@@ -23,9 +23,11 @@ class PostList(generics.ListCreateAPIView):
     ).order_by('-date_created')
     filter_backends = [
         filters.OrderingFilter,
-        DjangoFilterBackend
+        filters.SearchFilter,
+        DjangoFilterBackend,
     ]
     ordering_fields = ['likes_count', 'comments_count']
+    search_fields = ['owner__username', 'title']
     filterset_fields = [
         # filter by:
         # posts by a followed user
