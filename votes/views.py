@@ -18,12 +18,16 @@ class VoteList(generics.ListCreateAPIView):
     queryset = Vote.objects.all()
     filter_backends = [
         filters.OrderingFilter,
+        filters.SearchFilter,
         DjangoFilterBackend
     ]
     ordering_fields = [
         'owner',
         'comment',
         'comment__votes_count'
+    ]
+    search_fields = [
+        'owner__username', 'comment__content'
     ]
     filterset_fields = [
         # filter by
