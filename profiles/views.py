@@ -22,7 +22,11 @@ class ProfileList(generics.ListAPIView):
         following_count=Count('owner__following', distinct=True),
         comments_count=Count('owner__comment', distinct=True)
     ).order_by('-date_created')
-    filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
+    filter_backends = [
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend
+    ]
     ordering_fields = [
         'posts_count',
         'followers_count',
@@ -31,6 +35,7 @@ class ProfileList(generics.ListAPIView):
         'owner__followed__date_created',
         'owner__following__date_created'
         ]
+    search_fields = ['owner__username']
     filterset_fields = [
         # filter by:
         # users following profile
@@ -52,12 +57,3 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         following_count=Count('owner__following', distinct=True),
         comments_count=Count('owner__comment', distinct=True)
     ).order_by('-date_created')
-    filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
-    ordering_fields = [
-        'posts_count',
-        'followers_count',
-        'following_count',
-        'comments_count',
-        'owner__followed__date_created',
-        'owner__following__date_created'
-        ]
