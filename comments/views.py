@@ -20,7 +20,7 @@ class CommentList(generics.ListCreateAPIView):
 
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CommentSerializer
     queryset = Comment.objects.annotate(
         votes_count=Count('parent_comment', distinct=True)
