@@ -1,3 +1,22 @@
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+@api_view()
+def root_route(request):
+    return Response({
+        "message": "welcome to the Y API",
+        "instructions 1": "suffix the url with /admin to log in",
+        "instructions 2": "Or, view the different models with:",
+        "instructions 3": [
+            "/profiles",
+            "/posts",
+            "/comments",
+            "/follows",
+            "/likes",
+            "/votes", 
+        ]
+    })
+
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
 # from .settings import (
