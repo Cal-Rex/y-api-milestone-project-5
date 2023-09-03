@@ -1,3 +1,4 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from django.db import IntegrityError
 from .models import Follow
@@ -10,6 +11,7 @@ class FollowSerializer(serializers.ModelSerializer):
     followed_username = serializers.ReadOnlyField(source='followed.username')
     followed_user_image = serializers.ReadOnlyField(source='followed.image.url')
     is_owner = serializers.SerializerMethodField()
+    date_created = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         """
@@ -19,6 +21,9 @@ class FollowSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_date_created(self, obj):
+        return naturaltime(obj.date_created)
     
     def create(self, new_follow):
         try:

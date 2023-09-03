@@ -1,3 +1,4 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from .models import Comment
 from votes.models import Vote
@@ -10,6 +11,8 @@ class CommentSerializer(serializers.ModelSerializer):
     voted_on_id = serializers.SerializerMethodField()
     votes_count = serializers.ReadOnlyField()
     is_owner = serializers.SerializerMethodField()
+    date_created = serializers.SerializerMethodField()
+    date_updated = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         """
@@ -27,6 +30,12 @@ class CommentSerializer(serializers.ModelSerializer):
             if voted:
                 return voted.id
             else: None
+
+    def get_date_created(self, obj):
+        return naturaltime(obj.date_created)
+        
+    def get_date_updated(self, obj):
+        return naturaltime(obj.date_updated)
     
     def create(self, validate_comment):
         try:

@@ -1,3 +1,4 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
 from django.db import IntegrityError
 from .models import Vote
@@ -9,6 +10,7 @@ class VoteSerializer(serializers.ModelSerializer):
     owner_image = serializers.ReadOnlyField(source='owner.image.url')
     post = serializers.ReadOnlyField(source='comment.post.id')
     is_owner = serializers.SerializerMethodField()
+    date_created = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         """
@@ -18,6 +20,9 @@ class VoteSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_date_created(self, obj):
+        return naturaltime(obj.date_created)
     
     def create(self, new_vote):
         try:
