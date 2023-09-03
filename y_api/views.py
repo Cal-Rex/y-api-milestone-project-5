@@ -6,7 +6,7 @@ def root_route(request):
     return Response({
         "message": "welcome to the Y API",
         "instructions 1": "suffix the url with /admin to log in",
-        "instructions 2": "Or, view the different models with:",
+        "instructions 2": "Or, view the different tables with:",
         "instructions 3": [
             "/profiles",
             "/posts",
