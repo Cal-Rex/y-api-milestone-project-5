@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from .models import Post
+from likes.models import Like
 
 class PostSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.id')
     profile_image = serializers.ReadOnlyField(source='owner.image.url')
     is_owner = serializers.SerializerMethodField()
+    liked_by_user_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
 
@@ -17,6 +19,15 @@ class PostSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+    
+    def get_liked_by_user_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            liked = Like.objects.filter(owner=user, post=obj).first()
+            if liked:
+                return liked.id
+            else: None
+
     
     def create(self, validate_post):
         try:
@@ -39,6 +50,7 @@ class PostSerializer(serializers.ModelSerializer):
             'content',
             'image',
             'is_owner',
+            'liked_by_user_id',
             'likes_count',
             'comments_count'
         ]
