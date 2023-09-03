@@ -25,9 +25,15 @@ class PostList(generics.ListCreateAPIView):
     ]
     ordering_fields = ['likes_count', 'comments_count']
     filterset_fields = [
+        # filter by:
+        # posts by a followed user
         'owner__followed__owner__profile',
+        # posts by user
         'owner__profile',
+        # posts user has liked
         'liked_post__owner__profile',
+        # posts user has commented on
+        'parent_post__owner__profile',
     ]
     
 
