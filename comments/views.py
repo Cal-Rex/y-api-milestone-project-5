@@ -17,9 +17,11 @@ class CommentList(generics.ListCreateAPIView):
     )
     filter_backends = [
         filters.OrderingFilter,
-        DjangoFilterBackend
+        filters.SearchFilter,
+        DjangoFilterBackend,
     ]
     ordering_fields = ['votes_count', 'post']
+    search_fields = ['post__title', 'owner__username']
     filterset_fields = [
         # filter by:
         # comments by a user
