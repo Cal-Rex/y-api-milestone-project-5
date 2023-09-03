@@ -17,6 +17,14 @@ class PostSerializer(serializers.ModelSerializer):
         """
         request = self.context['request']
         return request.user == obj.owner
+    
+    def create(self, validate_post):
+        try:
+            return super().create(validate_post)
+        except ValueError:
+            raise serializers.ValidationError({
+                'detail': "You need to be signed in to do that, buddy!"
+            })
 
     class Meta:
         model = Post

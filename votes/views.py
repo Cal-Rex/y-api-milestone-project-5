@@ -4,6 +4,7 @@ from rest_framework import generics, filters
 from rest_framework.views import APIView
 from .models import Vote
 from .serializers import VoteSerializer
+from y_api.permissions import IsOwnerOrReadOnly
 
 
 class VoteList(generics.ListCreateAPIView):
@@ -17,3 +18,9 @@ class VoteList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class VoteDetail(generics.RetrieveDestroyAPIView):
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = VoteSerializer
+    queryset = Vote.objects.all()

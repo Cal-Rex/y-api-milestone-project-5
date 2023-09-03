@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters
+from rest_framework import generics, filters, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Count
@@ -12,7 +12,9 @@ class ProfileList(generics.ListAPIView):
     """
     List all profiles.
     """
-    
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly
+    ]
     serializer_class = ProfileSerializer
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__post', distinct=True),

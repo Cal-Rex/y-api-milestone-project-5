@@ -23,7 +23,13 @@ class PostList(generics.ListCreateAPIView):
     ordering_fields = ['likes_count', 'comments_count']
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        try:
+            serializer.save(owner=self.request.user)
+        except ValueError:
+            return Response({
+        "error": "You need to be signed in to do that buddy!"
+    })
+        
 
 
 class PostDetail(generics.RetrieveUpdateAPIView):

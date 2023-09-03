@@ -18,6 +18,14 @@ class CommentSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
     
+    def create(self, validate_comment):
+        try:
+            return super().create(validate_comment)
+        except ValueError:
+            raise serializers.ValidationError({
+                'detail': "You need to be signed in to do that, buddy!"
+            })
+    
     class Meta:
         model = Comment
         fields = [
