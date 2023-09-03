@@ -19,13 +19,17 @@ class LikeList(generics.ListCreateAPIView):
     queryset = Like.objects.all()
     filter_backends = [
         filters.OrderingFilter,
-        DjangoFilterBackend
+        filters.SearchFilter,
+        DjangoFilterBackend,
     ]
     ordering_fields = [
         'owner',
         'post',
         'post__likes_count',
         'post__comments_count'
+    ]
+    search_fields = [
+        'post__title', 'owner__username'
     ]
     filterset_fields = [
         # filter by:
