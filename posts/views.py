@@ -11,7 +11,8 @@ from y_api.permissions import IsOwnerOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
     """
-    List all posts.
+    List all posts
+    filter posts
     and, create a post
     """
     serializer_class = PostSerializer
@@ -35,16 +36,9 @@ class PostList(generics.ListCreateAPIView):
         # posts user has commented on
         'parent_post__owner__profile',
     ]
-    
 
     def perform_create(self, serializer):
-        try:
-            serializer.save(owner=self.request.user)
-        except ValueError:
-            return Response({
-        "error": "You need to be signed in to do that buddy!"
-    })
-        
+        serializer.save(owner=self.request.user)
 
 
 class PostDetail(generics.RetrieveUpdateAPIView):

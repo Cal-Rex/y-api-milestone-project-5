@@ -14,6 +14,21 @@ class CommentList(generics.ListCreateAPIView):
     queryset = Comment.objects.annotate(
         votes_count=Count('parent_comment', distinct=True)
     )
+    filter_backends = [
+        filters.OrderingFilter,
+        DjangoFilterBackend
+    ]
+    ordering_fields = ['votes_count', 'post']
+    filterset_fields = [
+        # filter by:
+        # comments by a user
+        'owner__profile',
+        # comments by post
+        'post',
+        # comments user has voted on
+        'parent_comment__owner'
+    ]
+
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
