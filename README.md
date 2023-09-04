@@ -4,6 +4,24 @@
 ## Table of Contents
 1. [INTRODUCTION](#introduction)
 2. [DESIGN](#design)
+    - [Development Planes](#development-planes)
+        - [Strategy](#strategy)
+            - User Stories
+        - [Scope](#scope)
+            - Project aims/Learning Outcomes
+        - [Structure](#structure)
+            - Database Model
+            - Database Schema
+        - [Skeleton](#skeleton)
+    
+    
+3. [DEVELOPMENT](#development)
+    - Agile Principles overview
+    - Milestone 1
+    - Milestone 2
+
+
+
 3. [FEATURES](#features)
 - [Design Features](#design-features)
 - [404 and 500 Features](#404-and-500-error-pages)
@@ -39,60 +57,185 @@ ___
 
 This project houses the API for the front-end of the site developed in react. [check out the front-end repo here](https://github.com/Cal-Rex/y-react-milestone-project-5)
 
+<br />
+
+___
+
+# Design
+## Development Planes
+
+### <ins>Strategy</ins>
+
+#### User Stories
+
+The following user stories were ascertained for the project as a whole:
+
+**Navigation**
+- _As a user, i want to be able to seemlessly navigate every page with a central navigation feature_
+- _As a user, i want to be prompted to log in to view content that can only be viewed by people with accounts_
+- _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
+
+**Authentication**
+- _as a user, i want to be able to create an account so tha i can access the platform_
+- _as a user, i want to be able to log in with my own account so i can partake in user-only features_
+- _as a user, i want to be able to see if i am logged in at any given moment, so i know to log out or switch accounts if i need to_
+- _as a user, i want to be able to remain logged-in to my account until i decide to sign out_
+
+**Creating and viewing content**
+- _As a user, i want to be able to make my own posts/pose my own questions for people to interact with_
+- _As a user, i want to be able to view questions/posts people have posted_
+- _As a user, i want to be able to view comments/answers and their vote count_
+- _As a user, i want to be able to vote on answers that i think are the best for a question/post_
+- _As a user, i want to be able to see the Profiles of the people that make posts and comments_
+- _As a user, i want to be able to comment/answer other people's posts
+
+**posts / individual posts**
+- _As a user, i want to view the most recent posts whenever i log in_
+- _As a user, i want to be able to filter posts by profiles that i am interested in_
+- _As a user, i want to be able to keep track of all the posts i have interacted with_
+- _As a user, i want to be able to seemlessley scroll through posts without having to wait for another page to load_
+- _As a user, i want to see what the most popular answer/comment is for a post when i am scrolling through posts to see what the general opinion is_
+- _As a user, i want to be able to view all the comments/answers to a post_
+- _As a user, i want to be able to edit any content that i publish, to amend spelling errors or upload a better picture_
+- _As a user, i want to be able to edit any comments that i make so i can amend spelling errors_
+- _As a user, i want to be able to see posts that have been voted on the most, to see what is trending on the site_
+
+**Profiles**
+- _As a user, i want to be able to view other user's public profiles and see what they have contributed to_
+- _As a user, i want to be able to Follow other users, so i have easier access to the content they create_
+- _As a user, i want to be able to edit my own profile at any time, so i can keep my profile photo and details up to date_
+- _As a user, i want to see what the top-voted comments/answers a profile has made_
+- _As a user, i want to be able to see the questions/posts a profile has made so i can decide if i like their content_
+- _As a user, i want to be able to update my username and password to keep my account secure_
+
+
+### <ins>Scope</ins>
+
+#### <ins>Project Aims:</ins>
+
+This API is built with the focus of achieveing the following learning outcomes from the Portfolio 5 Assessment guide:
+
+#### LO3: Create an Application Programming Interface (API) for consumption by 3rd party applications.
+1. > Build a Back-End for a Full-Stack web application that allows users to store and manipulate data records about a particular domain.
+
+2. > Design a database structure relevant for your domain, consisting of a minimum of TWO custom models (excluding user and profile models).
+
+3. > Write Python code that is consistent in style and conforms to the PEP8 style guide.
+
+4. > Include custom Python logic to demonstrate your proficiency in the language, e.g.: loops, if statements, DRF framework specific functions and classes.
+
+5. > Include Back-End framework specific features, e.g., class-based/generic views, permissions, serializers.
+
+6. > Develop the models (minimum two required) into a usable database where data is stored in a consistent and well-organized manner.
+
+7. > Create a complete set of CRUD functionality for records in the API.
+
+8. > Apply login and registration functionality.
+
+9. > Users should not be permitted write access to restricted content or functionality.
+
+10. > Implement manual testing and document the procedures and results in the README file for the Back-End application.
+
+11. > Use Git & GitHub for version control of the Back-End application up to deployment, using commit messages to document the development process.
+
+12. > Deploy a final version of the Back-End application code to a cloud-based hosting platform and test to ensure it matches the development version.
+
+13. > Ensure the security of the deployed version of the Back-End application, making sure to not include any passwords in the git repository, that all secret keys are hidden in environment variables or in files that are in .gitignore, and that DEBUG mode is turned off.
+
+14. > Document the deployment process for the API in the README file for the Back-End application.
+
+
+### Structure
+
+#### <ins>Data Model</ins>
+
+|               Database ER Diagram                |
+| :----------------------------------------------: |
+| ![Database model](/readme-assets/data-model.png) |
+
+#### <ins>Database Schema</ins>
+
+##### **Profile**
+|      Field   | Type          | Details                                          |
+| -----------: | :------------ | :----------------------------------------------- |
+|           id | PrimaryKey    | BigAuto Unique                                   |
+| date_created | DateTimeField | (auto_now_add)                                   |
+| date_updated | DateTimeField | (auto_now)                                       |
+|        owner | OneToOneField | links to **User** Table                          |
+|        image | ImageField    | upload to 'images/' (cloudinary db), default img |
+| display_name | CharField     | max length (100), blank                          |
+|          bio | TextField     | blank                                            |
+- the Profile table acts as an extension to the **User** table, adding more fields to allow the user to have a more personalised experience on the front-end UI
+- Display name is left optional, will be configured on the front end that if the `display_name` field is blank, then it will use their first name or username, further allowing individual users decide how they wish to represent themselves
+- a bio is also an optional field which users can enter a information about themselves
+
+##### **Post**
+|        Field | Type          | Details                                          |
+| -----------: | :------------ | :----------------------------------------------- |
+|           id | PrimaryKey    | BigAuto Unique                                   |
+| date_created | DateTimeField | (auto_now_add)                                   |
+| date_updated | DateTimeField | (auto_now)                                       |
+|        owner | ForeignKey    | links to **User** Table                          |
+|        image | ImageField    | upload to 'images/' (cloudinary db), default img |
+|        title | CharField     | max length (200), blank required                 |
+|      content | TextField     | blank                                            |
+- posts will require to have a title but not content, as the title could just be a straight question or as the saying goes "a picture is worth a thousand words"
+
+##### **Comment**
+|        field | type          | Details                 |
+| -----------: | :------------ | :---------------------- |
+|           id | PrimaryKey    | BigAuto Unique          |
+| date_created | DateTimeField | (auto_now_add)          |
+| date_updated | DateTimeField | (auto_now)              |
+|        owner | ForeignKey    | links to **User** Table |
+|         post | ForeignKey    | links to **Post** Table |
+|      content | TextField     | required                |
+- comments will be linked ot the post they are created under by the `post` field
+- text will be a required field. as blank comments give a possibility for unnecessary spam
+
+##### **Follow**
+|        Field | Type          | Details                 |
+| -----------: | :------------ | :---------------------- |
+|           id | PrimaryKey    | BigAuto Unique          |
+| date_created | DateTimeField | (auto_now_add)          |
+|        owner | ForeignKey    | links to **User** Table, using "following" related name |
+|     followed | ForeignKey    | links to **User** Table  using "followed" related name  |
+- in this table, the owner "owns" a follow object which targets another user, who is to be considered "followed"
+- related names are used to prevent conflict when making queries to the same table simultaneously
+
+##### **Like**
+|        Field | Type          | Details                  |
+| -----------: | :------------ | :----------------------- |
+|           id | PrimaryKey    | BigAuto Unique           |
+| date_created | DateTimeField | (auto_now_add)           |
+|        owner | ForeignKey    |  links to **User** Table |
+|         post | ForeignKey    |  links to **Post** Table |
+- pretty self explanatory, a like table that determines what users like what posts
+- a user ca only like a post/ own one like for a post
+
+##### **Vote**
+|        Field | Type          | Details                     |
+| -----------: | :------------ | :-------------------------- |
+|           id | PrimaryKey    | BigAuto Unique              |
+| date_created | DateTimeField | (auto_now_add)              |
+|        owner | ForeignKey    | links to **User** Table     |
+|      comment | ForeignKey    | links to **Comment** Table  |
+- works the exact same as likes, but for comments, votes are used to determine the top comment or answer for a post
+
+
+### Skeleton
+
+
+
+
+
+
 <br>
 ___
 
 # Design
 
-## Data models
+<br />
+___
 
-#### **Profile**
-| field | type |
-|-:|:-|
-|date_created| DateTimeField(auto_now_add) |
-|date_updated| DateTimeField(auto_now) |
-|owner| OneToOneField(User) |
-|image| ImageField |
-|display_name| CharField |
-|bio| TextField |
-
-#### **Post**
-| field | type |
-|-:|:-|
-|date_created| DateTimeField(auto_now_add) |
-|date_updated| DateTimeField(auto_now) |
-|owner| ForeignKey(User) |
-|image| ImageField |
-|title| CharField|
-|content| TextField |
-
-#### **Comment**
-| field | type |
-|-:|:-|
-|date_created| DateTimeField(auto_now_add) |
-|date_updated| DateTimeField(auto_now) |
-|owner| ForeignKey(User) |
-|post| ForeignKey(Post) |
-|content| TextField |
-
-#### **Follow**
-| field | type |
-|-:|:-|
-|date_created| DateTimeField(auto_now_add) |
-|owner| ForeignKey(User) |
-|followed| ForeignKey(User) |
-
-#### **Like**
-| field | type |
-|-:|:-|
-|date_created| DateTimeField(auto_now_add) |
-|owner| ForeignKey(User) |
-|post| ForeignKey(Post) |
-
-#### **Vote**
-| field | type |
-|-:|:-|
-|date_created| DateTimeField(auto_now_add) |
-|owner| ForeignKey(User) |
-|comment| ForeignKey(Comment) |
-
+## Development
