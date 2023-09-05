@@ -240,7 +240,8 @@ Due to the nature of this project being created in 2 seperate repositories, user
 | Build a Back-End for a Full-Stack web application that allows users to store and manipulate data records about a particular domain. |
 | Use Git & GitHub for version control of the Back-End application up to deployment, using commit messages to document the development process. |
 | Include custom Python logic to demonstrate your proficiency in the language, e.g.: loops, if statements, DRF framework specific functions and classes. |
-
+| Include Back-End framework specific features, e.g., class-based/generic views, permissions, serializers. |
+| Develop the models (minimum two required) into a usable database where data is stored in a consistent and well-organized manner. |
 
 | User Stories covered in this milestone                                                                | details |
 | :---------------------------------------------------------------------------------------------------- | :------ |
@@ -259,5 +260,90 @@ Due to the nature of this project being created in 2 seperate repositories, user
 
 
 <br />
+<br />
 
-## Miletsone 2 - 
+## Miletsone 2 - Build Detail views and create user-facing account creation/registration
+
+| Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Include Back-End framework specific features, e.g., class-based/generic views, permissions, serializers. |
+| Develop the models (minimum two required) into a usable database where data is stored in a consistent and well-organized manner. |
+| Create a complete set of CRUD functionality for records in the API. |
+| Apply login and registration functionality. |
+
+| User Stories covered in this milestone                                                                | details |
+| :---------------------------------------------------------------------------------------------------- | :------ |
+| _as a user, i want to be able to create an account so that i can access the platform_ | achieved by importing/using `dj_rest_auth` and `allauth` apps |
+| _As a user, i want to be able to comment/answer other people's posts_ | functionality achieved already in ListCreate views, but enhanced by detail views |
+| _As a user, i want to be able to edit any content that i publish, to amend spelling errors or upload a better picture_ | details views created with generics `Update` and `Destroy` views |
+| _As a user, i want to be able to edit any comments that i make so i can amend spelling errors_ | comment detail view created with `Update` and `Destroy` generics |
+| _As a user, i want to be able to Follow other users, so i have easier access to the content they create_ | with ability to create accounts, there are now accounts to follow |
+| _As a user, i want to be able to edit my own profile at any time, so i can keep my profile photo and details up to date_ | create profile detail view with `Retrieve` and `Update` generics |
+| _As a user, i want to be able to update my username and password to keep my account secure_ | create profile detail view with `Retrieve` and `Update` generics |
+
+| Tasks This Sprint | Sprint overview |
+| :---------------- | :-------------: |
+| create all detail oriented views for API using `generics`, therefore allowing the use of prefrabricated functionality from `Create` `Retrieve` `Update` and `Destroy` view tags. Create custom serialized data from related fields between models in their List and Detail views. implement registration apps and urls to create accounts outside of admin panel | ![sprint 2](/readme-assets/sprint-2-project-view.png) |
+
+
+<br />
+<br />
+
+## Miletsone 3 - Implement Filters, sorting and searching
+
+| Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Build a Back-End for a Full-Stack web application that allows users to store and manipulate data records about a particular domain. |
+| Include custom Python logic to demonstrate your proficiency in the language, e.g.: loops, if statements, DRF framework specific functions and classes. |
+| Include Back-End framework specific features, e.g., class-based/generic views, permissions, serializers. |
+| Develop the models (minimum two required) into a usable database where data is stored in a consistent and well-organized manner |
+
+| User Stories covered in this milestone                                                                | details |
+| :---------------------------------------------------------------------------------------------------- | :------ |
+|  _As a user, i want to be able to see posts that have been voted on the most, to see what is trending on the site_ | add serializer vote count on post view and implement filters |
+| _As a user, i want to see what the most popular answer/comment is for a post when i am scrolling through posts to see what the general opinion is_ | add serializer vote count on comment view and implement filters |
+| _As a user, i want to be able to view all the comments/answers to a post_ | implement filters on comments to filter by post |
+| _As a user, i want to be able to view other user's public profiles and see what they have contributed to_ | add filters to post comment, vote and like to filter by user/owner | 
+| _As a user, i want to see what the top-voted comments/answers a profile has made_ | add serializer vote count on comment view and implement filters |
+| _As a user, i want to be able to see the questions/posts a profile has made so i can decide if i like their content_ | add filters to post comment, vote and like to filter by user/owner |
+
+
+
+
+
+2. > Design a database structure relevant for your domain, consisting of a minimum of TWO custom models (excluding user and profile models).
+
+3. > Write Python code that is consistent in style and conforms to the PEP8 style guide.
+
+
+9. > Users should not be permitted write access to restricted content or functionality.
+
+10. > Implement manual testing and document the procedures and results in the README file for the Back-End application.
+
+
+12. > Deploy a final version of the Back-End application code to a cloud-based hosting platform and test to ensure it matches the development version.
+
+13. > Ensure the security of the deployed version of the Back-End application, making sure to not include any passwords in the git repository, that all secret keys are hidden in environment variables or in files that are in .gitignore, and that DEBUG mode is turned off.
+
+14. > Document the deployment process for the API in the README file for the Back-End application.
+
+
+
+
+**Navigation**
+- _As a user, i want to be able to seemlessly navigate every page with a central navigation feature_
+- _As a user, i want to be prompted to log in to view content that can only be viewed by people with accounts_
+- _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
+
+**Authentication**
+- _as a user, i want to be able to see if i am logged in at any given moment, so i know to log out or switch accounts if i need to_
+- _as a user, i want to be able to remain logged-in to my account until i decide to sign out_
+| _as a user, i want to be able to log in with my own account so i can partake in user-only features_ | 
+
+**Creating and viewing content**
+
+**posts / individual posts**
+- _As a user, i want to be able to seemlessley scroll through posts without having to wait for another page to load_
+
+**Profiles**
+- _As a user, i want to be able to update my username and password to keep my account secure_
