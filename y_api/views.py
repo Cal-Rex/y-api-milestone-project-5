@@ -3,6 +3,10 @@ from rest_framework.response import Response
 
 @api_view()
 def root_route(request):
+    """
+    object returned when visiting root route
+    of API, gives prompts on how to navigate via browser
+    """
     return Response({
         "message": "welcome to the Y API",
         "instructions 1": "suffix the url with /admin to log in",

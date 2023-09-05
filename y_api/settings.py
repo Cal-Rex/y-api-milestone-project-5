@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-if os.path.exists('env.py'):
-    import env
 import dj_database_url
+if os.path.exists('env.py'):
+    import env  #  flagged as warning, but used in development
+                #  when env.py file is available
 
 CLOUDINARY_STORAGE = {'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')}
 MEDIA_URL = '/media/'
@@ -113,9 +114,9 @@ MIDDLEWARE = [
 ]
 
 if 'CLIENT_ORIGIN' in os.environ:
-        CORS_ALLOWED_ORIGINS = [
-            os.environ.get('CLIENT_ORIGIN')
-        ]
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
 else:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https://.*\.gitpod\.io$",
