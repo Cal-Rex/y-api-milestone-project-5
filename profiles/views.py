@@ -1,16 +1,19 @@
-from django.shortcuts import render
+"""
+views for profiles app
+"""
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters, permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from django.db.models import Count
+from rest_framework import generics, filters, permissions
+from y_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
-from y_api.permissions import IsOwnerOrReadOnly
+
 
 class ProfileList(generics.ListAPIView):
     """
-    List all profiles.
+    List all profiles
+    functionality to order, filter
+    and search db model
     """
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly

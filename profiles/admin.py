@@ -1,3 +1,6 @@
+"""
+admin rule to register profile on creation
+"""
 from django.contrib import admin
 from .models import Profile
 
