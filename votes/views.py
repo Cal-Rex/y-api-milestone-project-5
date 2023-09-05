@@ -1,10 +1,11 @@
-from django.shortcuts import render
+"""
+views for votes app
+"""
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters, permissions
-from rest_framework.views import APIView
+from y_api.permissions import IsOwnerOrReadOnly
 from .models import Vote
 from .serializers import VoteSerializer
-from y_api.permissions import IsOwnerOrReadOnly
 
 
 class VoteList(generics.ListCreateAPIView):
@@ -45,6 +46,10 @@ class VoteList(generics.ListCreateAPIView):
 
 
 class VoteDetail(generics.RetrieveDestroyAPIView):
+    """
+    detail view of a vote that 
+    gives owner options delete
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = VoteSerializer
     queryset = Vote.objects.all()
