@@ -307,7 +307,44 @@ Due to the nature of this project being created in 2 seperate repositories, user
 | _As a user, i want to see what the top-voted comments/answers a profile has made_ | add serializer vote count on comment view and implement filters |
 | _As a user, i want to be able to see the questions/posts a profile has made so i can decide if i like their content_ | add filters to post comment, vote and like to filter by user/owner |
 
+| Tasks This Sprint | Sprint overview |
+| :---------------- | :-------------: |
+| Create import the `django_filters` app and implement filters on all views and serializers to fulfil needs of user stories and ensure veratile filtering and searching capabilities to take advantage of when building front-end. And also, to fulfil learning outcomes. encountered some issues trying to manipulate data between post <-> votes. have pushed to backlog to be revisited when building front-end as could be achieved with React logic| ![sprint 3](/readme-assets/sprint-3-project-view.png) |
 
+<br />
+<br />
+
+## Miletsone 4 - implementing Permissions and enforcing authentication for data manipulation
+
+| Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Include custom Python logic to demonstrate your proficiency in the language, e.g.: loops, if statements, DRF framework specific functions and classes. |
+| Include Back-End framework specific features, e.g., class-based/generic views, permissions, serializers. |
+| Users should not be permitted write access to restricted content or functionality. |
+
+| User Stories covered in this milestone                                                                | details |
+| :---------------------------------------------------------------------------------------------------- | :------ |
+|  _As a user, i want to be prompted to log in to view content that can only be viewed by people with accounts_ | implement permissions on all views |
+|  _As a user, i want to be able to log in with my own account so i can partake in user-only features_ | write custom permission so only users that created an object can modify it |
+
+| Tasks This Sprint | Sprint overview |
+| :---------------- | :-------------: |
+| Install and implement ther permission library from django. Implement `IsAuthenticatedOrReadOnly` permission class to all views. Create a custom permission of `IsOwnerOrReadOnly` to allow only owners of database records to modify and delete them | ![Sprint 4](/readme-assets/sprint-4-project-view.png) |
+
+<br />
+<br />
+
+
+## Miletsone 5 - Live Deployment
+
+| Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Deploy a final version of the Back-End application code to a cloud-based hosting platform and test to ensure it matches the development version. |
+| Ensure the security of the deployed version of the Back-End application, making sure to not include any passwords in the git repository, that all secret keys are hidden in environment variables or in files that are in .gitignore, and that DEBUG mode is turned off. |
+| Document the deployment process for the API in the README file for the Back-End application. |
+
+| Tasks This Sprint | Sprint overview |
+| :---------------- | :-------------: |
 
 
 
@@ -315,15 +352,7 @@ Due to the nature of this project being created in 2 seperate repositories, user
 
 3. > Write Python code that is consistent in style and conforms to the PEP8 style guide.
 
-
-9. > Users should not be permitted write access to restricted content or functionality.
-
 10. > Implement manual testing and document the procedures and results in the README file for the Back-End application.
-
-
-12. > Deploy a final version of the Back-End application code to a cloud-based hosting platform and test to ensure it matches the development version.
-
-13. > Ensure the security of the deployed version of the Back-End application, making sure to not include any passwords in the git repository, that all secret keys are hidden in environment variables or in files that are in .gitignore, and that DEBUG mode is turned off.
 
 14. > Document the deployment process for the API in the README file for the Back-End application.
 
@@ -332,13 +361,11 @@ Due to the nature of this project being created in 2 seperate repositories, user
 
 **Navigation**
 - _As a user, i want to be able to seemlessly navigate every page with a central navigation feature_
-- _As a user, i want to be prompted to log in to view content that can only be viewed by people with accounts_
 - _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
 
 **Authentication**
 - _as a user, i want to be able to see if i am logged in at any given moment, so i know to log out or switch accounts if i need to_
 - _as a user, i want to be able to remain logged-in to my account until i decide to sign out_
-| _as a user, i want to be able to log in with my own account so i can partake in user-only features_ | 
 
 **Creating and viewing content**
 
@@ -346,4 +373,3 @@ Due to the nature of this project being created in 2 seperate repositories, user
 - _As a user, i want to be able to seemlessley scroll through posts without having to wait for another page to load_
 
 **Profiles**
-- _As a user, i want to be able to update my username and password to keep my account secure_
