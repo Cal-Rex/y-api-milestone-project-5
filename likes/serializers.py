@@ -1,10 +1,18 @@
+"""
+serializer to create custom /
+fields not natively stored in db models
+serializes data into JSON compatible format
+"""
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from rest_framework import serializers
 from django.db import IntegrityError
+from rest_framework import serializers
 from .models import Like
 
 
 class LikeSerializer(serializers.ModelSerializer):
+    """
+    serializes Like model data
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     owner_image = serializers.ReadOnlyField(source='owner.image.url')
@@ -22,17 +30,25 @@ class LikeSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     def get_date_created(self, obj):
+        """
+        amends date_updated 
+        into more readable format
+        """
         return naturaltime(obj.date_created)
-    
-    def create(self, validate_like):
+
+    def create(self, validated_data):
         try:
-            return super().create(validate_like)
+            return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
                 'detail': "IT'S POSSIBLE THIS USER ALREADY LIKES THIS POST"
             })
 
     class Meta:
+        """
+        orders data returned to view
+        by serializer
+        """
         model = Like
         fields = [
             'id',

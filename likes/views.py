@@ -1,10 +1,11 @@
-from django.shortcuts import render
+"""
+views for likes app
+"""
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters, permissions
-from rest_framework.views import APIView
+from y_api.permissions import IsOwnerOrReadOnly
 from .models import Like
 from .serializers import LikeSerializer
-from y_api.permissions import IsOwnerOrReadOnly
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class LikeList(generics.ListCreateAPIView):
@@ -44,6 +45,11 @@ class LikeList(generics.ListCreateAPIView):
 
 
 class LikeDetail(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve a specific like
+    Destroy like option if owner of the like 
+    viewing
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = LikeSerializer
     queryset = Like.objects.all()

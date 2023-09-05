@@ -26,4 +26,4 @@ class Post(models.Model):
         ordering = ['-date_created']
 
     def __str__(self):
-        return f"post no: {self} - {self.title}"
+        return f"post {self.id}: {self.title}"
