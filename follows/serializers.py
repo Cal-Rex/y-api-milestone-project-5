@@ -1,10 +1,18 @@
+"""
+serializer to create custom /
+fields not natively stored in db models
+serializes data into JSON compatible format
+"""
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from rest_framework import serializers
 from django.db import IntegrityError
+from rest_framework import serializers
 from .models import Follow
 
 
 class FollowSerializer(serializers.ModelSerializer):
+    """
+    serializes Follow model data
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     owner_image = serializers.ReadOnlyField(source='owner.image.url')
@@ -23,17 +31,25 @@ class FollowSerializer(serializers.ModelSerializer):
         return request.user == obj.owner
 
     def get_date_created(self, obj):
+        """
+        amends date_created 
+        into more readable format
+        """
         return naturaltime(obj.date_created)
-    
-    def create(self, new_follow):
+
+    def create(self, validated_data):
         try:
-            return super().create(new_follow)
+            return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
                 'detail': "IT'S POSSIBLE THIS FOLLOW PAIRING ALREADY EXISTS"
             })
 
     class Meta:
+        """
+        orders data returned to view
+        by serializer
+        """
         model = Follow
         fields = [
             'id',

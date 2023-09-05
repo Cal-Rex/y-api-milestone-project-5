@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from django_filters.rest_framework import DjangoFilterBackend
+"""
+views for follows app
+"""
 from rest_framework import generics, permissions
+from y_api.permissions import IsOwnerOrReadOnly
 from .models import Follow
 from .serializers import FollowSerializer
-from y_api.permissions import IsOwnerOrReadOnly
 
 
 class FollowList(generics.ListCreateAPIView):
@@ -21,6 +22,11 @@ class FollowList(generics.ListCreateAPIView):
 
 
 class FollowDetail(generics.RetrieveDestroyAPIView):
+    """
+    Retrieve a specific follow instance
+    Destroy follow option if owner of the follow 
+    viewing
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = FollowSerializer
     queryset = Follow.objects.all()

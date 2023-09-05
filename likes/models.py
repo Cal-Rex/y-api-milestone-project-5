@@ -1,6 +1,6 @@
 """
 database model for
-posts
+likes
 """
 from django.db import models
 from django.db.models import UniqueConstraint
@@ -18,6 +18,8 @@ class Like(models.Model):
 
     class Meta:
         """
+        Meta fields to allow only 1 like
+        object per post per user
         default ordering by date created
         """
         ordering = ['-date_created']
