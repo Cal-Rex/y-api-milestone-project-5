@@ -1,12 +1,13 @@
-from django.shortcuts import render
+"""
+views for profiles app
+"""
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters, permissions
 from django.db.models import Count
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics, filters, permissions
+from y_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
-from y_api.permissions import IsOwnerOrReadOnly
+
 
 
 class PostList(generics.ListCreateAPIView):

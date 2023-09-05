@@ -1,3 +1,6 @@
+"""
+urls paths for posts
+"""
 from django.urls import path
 from posts import views
 
