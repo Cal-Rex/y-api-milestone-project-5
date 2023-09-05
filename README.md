@@ -71,7 +71,7 @@ ___
 The following user stories were ascertained for the project as a whole:
 
 **Navigation**
-- _As a user, i want to be able to seemlessly navigate every page with a central navigation feature_
+- _As a user, i want to be able to a navigate every page with a central navigation feature_
 - _As a user, i want to be prompted to log in to view content that can only be viewed by people with accounts_
 - _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
 
@@ -343,24 +343,32 @@ Due to the nature of this project being created in 2 seperate repositories, user
 | Ensure the security of the deployed version of the Back-End application, making sure to not include any passwords in the git repository, that all secret keys are hidden in environment variables or in files that are in .gitignore, and that DEBUG mode is turned off. |
 | Document the deployment process for the API in the README file for the Back-End application. |
 
+| User Stories covered in this milestone                                                                | details |
+| :---------------------------------------------------------------------------------------------------- | :------ |
+| _As a user, i want to be able to seamlessley scroll through posts without having to wait for another page to load_ | implement pagination into API so that record data is chunked on the front end, allowing incremental loading of content for user, lowering load times and data demand |
+
 | Tasks This Sprint | Sprint overview |
 | :---------------- | :-------------: |
+| implement use of JWT tokens for deployed production version, setting JSON export of data from API as default in production, format date fields to be user-friendly, add a root-route to API that gives a prompt to users. add pagination to List views to help manage data load on front end | ![sprint 5](/readme-assets/sprint-5-project-view.png) |
 
 
+<br />
+<br />
 
-2. > Design a database structure relevant for your domain, consisting of a minimum of TWO custom models (excluding user and profile models).
+## Milestone 6 - PEP8 Compliance and testing
 
-3. > Write Python code that is consistent in style and conforms to the PEP8 style guide.
+| Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Write Python code that is consistent in style and conforms to the PEP8 style guide. |
+| Implement manual testing and document the procedures and results in the README file for the Back-End application. |
 
-10. > Implement manual testing and document the procedures and results in the README file for the Back-End application.
 
-14. > Document the deployment process for the API in the README file for the Back-End application.
 
 
 
 
 **Navigation**
-- _As a user, i want to be able to seemlessly navigate every page with a central navigation feature_
+- _As a user, i want to be able to seamlessly navigate every page with a central navigation feature_
 - _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
 
 **Authentication**
