@@ -76,7 +76,7 @@ The following user stories were ascertained for the project as a whole:
 - _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
 
 **Authentication**
-- _as a user, i want to be able to create an account so tha i can access the platform_
+- _as a user, i want to be able to create an account so that i can access the platform_
 - _as a user, i want to be able to log in with my own account so i can partake in user-only features_
 - _as a user, i want to be able to see if i am logged in at any given moment, so i know to log out or switch accounts if i need to_
 - _as a user, i want to be able to remain logged-in to my account until i decide to sign out_
@@ -223,19 +223,41 @@ This API is built with the focus of achieveing the following learning outcomes f
 - works the exact same as likes, but for comments, votes are used to determine the top comment or answer for a post
 
 
-### Skeleton
+<br />
 
-
-
-
-
-
-<br>
 ___
 
-# Design
+# Development
+
+This project was Developed using Agile methodology, user stories and learning outcomes were achieved by completing the following documented Agile sprints, documented in GitHub Projects
+
+Due to the nature of this project being created in 2 seperate repositories, user stories were documented as project milestones to group tasks under relevant user stories in both repositories
+
+## Milestone 1 - Setup, admin account, and base models
+
+| Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Build a Back-End for a Full-Stack web application that allows users to store and manipulate data records about a particular domain. |
+| Use Git & GitHub for version control of the Back-End application up to deployment, using commit messages to document the development process. |
+| Include custom Python logic to demonstrate your proficiency in the language, e.g.: loops, if statements, DRF framework specific functions and classes. |
+
+
+| User Stories covered in this milestone                                                                | details |
+| :---------------------------------------------------------------------------------------------------- | :------ |
+| _As a user, i want to be able to see the Profiles of the people that make posts and comments_         | Profile List view will show all profiles |
+| _As a user, i want to be able to make my own posts/pose my own questions for people to interact with_ | use of `generics` in Djagno allows for easy form creation on all list views in tables |
+| _As a user, i want to be able to view questions/posts people have posted_                             | Post List view will display this data |
+| _As a user, i want to be able to view comments/answers and their vote count_                          | Comment List view will display this data |
+| _As a user, i want to be able to vote on answers that i think are the best for a question/post_       | use of `generics` will allow creation of new votes for comments via form |
+| _As a user, i want to view the most recent posts whenever i log in_                                   | all tables will have a `date-created` field and will be ordered by most recent entries by default, though filtering will be added later to the API |
+| _As a user, i want to be able to filter posts by profiles that i am interested in_                    | the follows app, table and views will allow users to follow other users, allowing filtering on the front end of the application, though filtering will be added later to the API |
+| _As a user, i want to be able to keep track of all the posts i have interacted with_                  | use of the likes and votes tables will allow users to see what content they have interacted with on the front end application, though filtering will be added later to the API |
+
+| Tasks This Sprint | Sprint overview |
+| :---------------- | :-------------: |
+| project setup. Create all of the base models. Create an admin user. use admin user to check tables accept new data. There were no issues completing any of the tasks during this sprint. a self-created guide to create apps with generic views was made during the walkthrough modules of the course and was referred to to efficiently create all of the required apps in the tasks highlighted by the user stories. | ![sprint 1](/readme-assets/sprint-1-project-view.png)|
+
 
 <br />
-___
 
-## Development
+## Miletsone 2 - 
