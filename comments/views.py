@@ -1,15 +1,21 @@
-from django.shortcuts import render
+"""
+views for comments app
+"""
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, filters, permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from y_api.permissions import IsOwnerOrReadOnly
 from .models import Comment
 from .serializers import CommentSerializer
-from y_api.permissions import IsOwnerOrReadOnly
+
 
 
 class CommentList(generics.ListCreateAPIView):
+    """
+    List all of the comments 
+    that have been made by users
+    authenticated users can create new comments
+    """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = CommentSerializer
     queryset = Comment.objects.annotate(
@@ -38,6 +44,11 @@ class CommentList(generics.ListCreateAPIView):
 
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve a specific comment
+    edit or Destroy comment if owner of the comment
+    viewing
+    """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CommentSerializer
     queryset = Comment.objects.annotate(

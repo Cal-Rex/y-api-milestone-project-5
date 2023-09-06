@@ -31,4 +31,4 @@ class Follow(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.owner} now following {self.followed}"
+        return f"follow: {self.followed}"

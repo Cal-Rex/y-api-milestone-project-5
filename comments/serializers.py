@@ -1,9 +1,18 @@
+"""
+serializer to create custom /
+fields not natively stored in db models
+serializes data into JSON compatible format
+"""
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from rest_framework import serializers
-from .models import Comment
 from votes.models import Vote
+from .models import Comment
+
 
 class CommentSerializer(serializers.ModelSerializer):
+    """
+    serializes Comment model data
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.id')
     profile_image = serializers.ReadOnlyField(source='owner.image.url')
