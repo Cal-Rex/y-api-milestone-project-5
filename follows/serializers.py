@@ -13,11 +13,21 @@ class FollowSerializer(serializers.ModelSerializer):
     """
     serializes Follow model data
     """
-    owner = serializers.ReadOnlyField(source='owner.username')
-    owner_id = serializers.ReadOnlyField(source='owner.id')
-    owner_image = serializers.ReadOnlyField(source='owner.image.url')
-    followed_username = serializers.ReadOnlyField(source='followed.username')
-    followed_user_image = serializers.ReadOnlyField(source='followed.image.url')
+    owner = serializers.ReadOnlyField(
+        source='owner.username'
+    )
+    owner_id = serializers.ReadOnlyField(
+        source='owner.id'
+    )
+    owner_image = serializers.ReadOnlyField(
+        source='owner.image.url'
+    )
+    followed_username = serializers.ReadOnlyField(
+        source='followed.username'
+    )
+    followed_user_image = serializers.ReadOnlyField(
+        source='followed.image.url'
+    )
     is_owner = serializers.SerializerMethodField()
     date_created = serializers.SerializerMethodField()
 
@@ -32,7 +42,7 @@ class FollowSerializer(serializers.ModelSerializer):
 
     def get_date_created(self, obj):
         """
-        amends date_created 
+        amends date_created
         into more readable format
         """
         return naturaltime(obj.date_created)

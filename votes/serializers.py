@@ -60,4 +60,4 @@ class VoteSerializer(serializers.ModelSerializer):
             'post',
             'comment',
             'is_owner',
-    ]
+        ]

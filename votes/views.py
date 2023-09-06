@@ -40,14 +40,13 @@ class VoteList(generics.ListCreateAPIView):
         'comment',
     ]
 
-
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
 
 class VoteDetail(generics.RetrieveDestroyAPIView):
     """
-    detail view of a vote that 
+    detail view of a vote that
     gives owner options delete
     """
     permission_classes = [IsOwnerOrReadOnly]

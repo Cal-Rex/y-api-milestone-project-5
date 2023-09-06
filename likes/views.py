@@ -47,7 +47,7 @@ class LikeList(generics.ListCreateAPIView):
 class LikeDetail(generics.RetrieveDestroyAPIView):
     """
     Retrieve a specific like
-    Destroy like option if owner of the like 
+    Destroy like option if owner of the like
     viewing
     """
     permission_classes = [IsOwnerOrReadOnly]

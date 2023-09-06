@@ -34,14 +34,14 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_date_created(self, obj):
         """
-        amends date_created 
+        amends date_created
         into more readable format
         """
         return naturaltime(obj.date_created)
 
     def get_date_updated(self, obj):
         """
-        amends date_updated 
+        amends date_updated
         into more readable format
         """
         return naturaltime(obj.date_updated)
@@ -57,7 +57,7 @@ class PostSerializer(serializers.ModelSerializer):
             liked = Like.objects.filter(owner=user, post=obj).first()
             if liked:
                 return liked.id
-            else: None
+            return None
 
     def create(self, validate_post):
         try:

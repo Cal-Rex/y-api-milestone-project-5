@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import dj_database_url
-import os  #  linter has issue with ordering,
-           #  but if statement must come directly after os otherwise an error is thrown
+# linter has issue with ordering,
+# but if statement must come directly after os otherwise an error is thrown
+import os
 if os.path.exists('env.py'):
-    import env  #  flagged as warning, but used in development
-                #  when env.py file is available
-
+    import env
+#  flagged as warning, but used in development
+#  when env.py file is available
 
 
 CLOUDINARY_STORAGE = {'CLOUDINARY_URL': os.environ.get('CLOUDINARY_URL')}
@@ -38,7 +39,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
-    '8000-calrex-yapimilestonepro-z23jn325lep.ws-eu104.gitpod.io', 
+    '8000-calrex-yapimilestonepro-z23jn325lep.ws-eu104.gitpod.io',
     'y-api-milestone-project-5-3530384cc0f8.herokuapp.com'
 ]
 
@@ -84,7 +85,7 @@ REST_FRAMEWORK = {
         else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     )],
     'DATETIME_FORMAT': '%d %b %Y',
-    'DEFAULT_PAGINATION_CLASS': 
+    'DEFAULT_PAGINATION_CLASS':
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
@@ -102,7 +103,8 @@ JWT_AUTH_SAMESITE = 'None'
 # alter the user detail serializer to use
 # additional custom fields.
 REST_AUTH_SERIALIZERS = {
-            'USER_DETAILS_SERIALIZER': 'y_api.serializers.CurrentUserSerializer'
+            'USER_DETAILS_SERIALIZER':
+            'y_api.serializers.CurrentUserSerializer'
         }
 
 MIDDLEWARE = [
@@ -167,18 +169,24 @@ else:
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
+# 'NAME' values cannot be shortened, so noqa'd to comply
+# with CI linter standards
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 

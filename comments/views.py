@@ -9,10 +9,9 @@ from .models import Comment
 from .serializers import CommentSerializer
 
 
-
 class CommentList(generics.ListCreateAPIView):
     """
-    List all of the comments 
+    List all of the comments
     that have been made by users
     authenticated users can create new comments
     """
@@ -37,7 +36,6 @@ class CommentList(generics.ListCreateAPIView):
         # comments user has voted on
         'parent_comment__owner'
     ]
-
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

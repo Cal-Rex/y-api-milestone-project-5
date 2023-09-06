@@ -9,7 +9,6 @@ from .models import Post
 from .serializers import PostSerializer
 
 
-
 class PostList(generics.ListCreateAPIView):
     """
     List all posts
@@ -19,8 +18,8 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.annotate(
-        likes_count = Count('liked_post', distinct=True),
-        comments_count = Count('parent_post', distinct=True),
+        likes_count=Count('liked_post', distinct=True),
+        comments_count=Count('parent_post', distinct=True),
     ).order_by('-date_created')
     filter_backends = [
         filters.OrderingFilter,
@@ -53,8 +52,8 @@ class PostDetail(generics.RetrieveUpdateAPIView):
     permission_classes = permission_classes = [IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.annotate(
-        likes_count = Count('liked_post', distinct=True),
-        comments_count = Count('parent_post', distinct=True),
+        likes_count=Count('liked_post', distinct=True),
+        comments_count=Count('parent_post', distinct=True),
     ).order_by('-date_created')
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['likes_count', 'comments_count']

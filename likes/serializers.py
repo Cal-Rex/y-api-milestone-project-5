@@ -31,7 +31,7 @@ class LikeSerializer(serializers.ModelSerializer):
 
     def get_date_created(self, obj):
         """
-        amends date_updated 
+        amends date_updated
         into more readable format
         """
         return naturaltime(obj.date_created)

@@ -47,9 +47,10 @@ class ProfileList(generics.ListAPIView):
         'owner__followed__owner__profile',
     ]
 
+
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
-    Retrieve a specific profile 
+    Retrieve a specific profile
     or, update a profile if you're the owner
     """
     permission_classes = permission_classes = [IsOwnerOrReadOnly]

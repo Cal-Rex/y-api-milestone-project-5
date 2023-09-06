@@ -13,8 +13,16 @@ class Like(models.Model):
     db model fields
     """
     date_created = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='liked_by')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='liked_post')
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='liked_by'
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='liked_post'
+    )
 
     class Meta:
         """

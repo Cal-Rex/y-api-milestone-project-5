@@ -15,7 +15,8 @@ class Profile(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
-                upload_to='images/', default='../media/images/Y/y-big-canvas-black-azmsre'
+                upload_to='images/',
+                default='../media/images/Y/y-big-canvas-black-azmsre'
             )
     display_name = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
@@ -30,9 +31,10 @@ class Profile(models.Model):
         return f"{self.owner}'s profile"
 
 
-def create_profile(instance, created):  # parameters `sender` and `kwargs**` removed
+# parameters `sender` and `kwargs**` removed
+def create_profile(instance, created):
     """
-    signal to create a profile record 
+    signal to create a profile record
     for a user when a user is created
     """
     if created:

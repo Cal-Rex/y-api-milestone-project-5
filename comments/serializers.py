@@ -38,14 +38,14 @@ class CommentSerializer(serializers.ModelSerializer):
             voted = Vote.objects.filter(owner=user, comment=obj).first()
             if voted:
                 return voted.id
-            else: None
+            return None
 
     def get_date_created(self, obj):
         return naturaltime(obj.date_created)
-        
+
     def get_date_updated(self, obj):
         return naturaltime(obj.date_updated)
-    
+
     def create(self, validate_comment):
         try:
             return super().create(validate_comment)
@@ -53,7 +53,7 @@ class CommentSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 'detail': "You need to be signed in to do that, buddy!"
             })
-    
+
     class Meta:
         model = Comment
         fields = [
