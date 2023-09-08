@@ -355,17 +355,19 @@ Due to the nature of this project being created in 2 seperate repositories, user
 <br />
 <br />
 
-## Milestone 6 - PEP8 Compliance and testing
+## Milestone 6 - PEP8 Compliance
 
 | Learning Outcomes / Acceptance Criteria covered in this milestone                                                                   |
 | :---------------------------------------------------------------------------------------------------------------------------------: |
 | Write Python code that is consistent in style and conforms to the PEP8 style guide. |
-| Implement manual testing and document the procedures and results in the README file for the Back-End application. |
 
+This sprint was conducted with the idea that code for the API is correct and completely functional ahead of Front-end/React project development.
 
+| Tasks This Sprint | Sprint overview |
+| :---------------- | :-------------: |
+| run all code through certified linting tool/s to ensure PEP8 compiance and that code is structured correctly | ![sprint 6](/readme-assets/sprint-6-project-view.png) |
 
-
-
+A number of unresolvable errors were found in the project when linting the code with the **Pylint** extension. However, these errors were revealed to be obsolete when cross-checking project through the **CI Pyton Linter** app provided by Code Institute. More details on these errors can be found in the [Bugs](#bugs) section.
 
 **Navigation**
 - _As a user, i want to be able to seamlessly navigate every page with a central navigation feature_
@@ -381,3 +383,6 @@ Due to the nature of this project being created in 2 seperate repositories, user
 - _As a user, i want to be able to seemlessley scroll through posts without having to wait for another page to load_
 
 **Profiles**
+
+
+# Bugs
