@@ -32,11 +32,12 @@ class Profile(models.Model):
 
 
 # parameters `sender` and `kwargs**` removed
-def create_profile(instance, created):
+def create_profile(sender, instance, created, **kwargs):
     """
     signal to create a profile record
     for a user when a user is created
     """
     if created:
         Profile.objects.create(owner=instance)
-        post_save.connect(create_profile, sender=User)
+
+post_save.connect(create_profile, sender=User)
