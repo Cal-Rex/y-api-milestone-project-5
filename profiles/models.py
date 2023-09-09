@@ -16,7 +16,7 @@ class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(
                 upload_to='images/',
-                default='../media/images/Y/y-big-canvas-black-azmsre'
+                default='../media/images/y-big-canvas-white_dtobjd.png'
             )
     display_name = models.CharField(max_length=100, blank=True)
     bio = models.TextField(blank=True)
