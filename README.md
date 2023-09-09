@@ -386,3 +386,16 @@ A number of unresolvable errors were found in the project when linting the code 
 
 
 # Bugs
+
+### Resolved:
+Connection refused error when creating an account
+- User record would be created but not profile and an error would be thrown during authentication
+- added following code from stack overflow source and resolved issue. As email vericfication is mandatory this was changed to `True`
+```py
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+ACCOUNT_EMAIL_REQUIRED = True
+```
+- [source](https://stackoverflow.com/questions/45006190/connectionrefusederror-in-django-rest-api-while-registration-process)

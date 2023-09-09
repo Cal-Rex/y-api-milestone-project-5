@@ -31,7 +31,7 @@ class Profile(models.Model):
         return f"{self.owner}'s profile"
 
 
-# parameters `sender` and `kwargs**` removed
+# parameters `sender` and `**kwargs` removed
 def create_profile(sender, instance, created, **kwargs):
     """
     signal to create a profile record
