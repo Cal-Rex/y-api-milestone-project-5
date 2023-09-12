@@ -15,7 +15,7 @@ class PostSerializer(serializers.ModelSerializer):
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.id')
-    profile_image = serializers.ReadOnlyField(source='owner.image.url')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     is_owner = serializers.SerializerMethodField()
     date_created = serializers.SerializerMethodField()
     date_updated = serializers.SerializerMethodField()
