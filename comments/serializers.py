@@ -15,7 +15,7 @@ class CommentSerializer(serializers.ModelSerializer):
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.id')
-    profile_image = serializers.ReadOnlyField(source='owner.image.url')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     post_title = serializers.ReadOnlyField(source='post.title')
     voted_on_id = serializers.SerializerMethodField()
     votes_count = serializers.ReadOnlyField()
