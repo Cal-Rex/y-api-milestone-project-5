@@ -1,5 +1,5 @@
 """
-admin rule to register profile on creation
+view tables in admin menu
 """
 from django.contrib import admin
 from .models import Profile

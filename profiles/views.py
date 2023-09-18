@@ -41,9 +41,9 @@ class ProfileList(generics.ListAPIView):
     search_fields = ['owner__username']
     filterset_fields = [
         # filter by:
-        # users following profile
+        # profiles a user has followed
         'owner__following__followed__profile',
-        # profiles following user
+        # profiles that are following the user
         'owner__followed__owner__profile',
     ]
 
