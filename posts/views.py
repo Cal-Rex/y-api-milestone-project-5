@@ -44,10 +44,10 @@ class PostList(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class PostDetail(generics.RetrieveUpdateAPIView):
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve a specific post
-    or, update a post if you're the owner
+    or, update/delete a post if you're the owner
     """
     permission_classes = permission_classes = [IsOwnerOrReadOnly]
     serializer_class = PostSerializer
