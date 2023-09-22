@@ -14,17 +14,17 @@
             - Database Schema
         - [Skeleton](#skeleton)
     
-    
 3. [DEVELOPMENT](#development)
     - Agile Principles overview
     - Milestone 1
     - Milestone 2
-
-
+    - Milestone 3
+    - Milestone 4
+    - Milestone 5
+    - Milestone 6
 
 3. [FEATURES](#features)
 - [Design Features](#design-features)
-- [404 and 500 Features](#404-and-500-error-pages)
 - [Features to Implement in Future](#features-to-implement-in-future)
 
 4. [BUGS](#bugs)
@@ -369,25 +369,197 @@ This sprint was conducted with the idea that code for the API is correct and com
 
 A number of unresolvable errors were found in the project when linting the code with the **Pylint** extension. However, these errors were revealed to be obsolete when cross-checking project through the **CI Pyton Linter** app provided by Code Institute. More details on these errors can be found in the [Bugs](#bugs) section.
 
-**Navigation**
-- _As a user, i want to be able to seamlessly navigate every page with a central navigation feature_
-- _As a user, i want to be able to navigate through pages and posts with minimal waiting time_
+Subsequent Milestones were conducted on the front end repository. [Check it out here](https://github.com/Cal-Rex/y-react-front-end-milestone-project-5/blob/main/README.md)
 
-**Authentication**
-- _as a user, i want to be able to see if i am logged in at any given moment, so i know to log out or switch accounts if i need to_
-- _as a user, i want to be able to remain logged-in to my account until i decide to sign out_
+___
 
-**Creating and viewing content**
+# Features
 
-**posts / individual posts**
-- _As a user, i want to be able to seemlessley scroll through posts without having to wait for another page to load_
+### Root
+when a user visits the API, if connected successfully, the following object will be returned as a welcome message:
+```py
+{
+    "message": "welcome to the Y API",
+    "instructions 1": "suffix the url with /admin to log in",
+    "instructions 2": "Or, view the different tables with:",
+    "instructions 3": [
+        "/profiles",
+        "/posts",
+        "/comments",
+        "/follows",
+        "/likes",
+        "/votes"
+    ]
+}
+```
 
-**Profiles**
+### Admin
+The API has a working admin page, though it does not adopt styling in production view, it can still be accessed to manipulate data in all tables as an admin. simply append the environment url with `/admin` to log in with admin credentials
 
+### registration
+new accounts can be created using `dj-rest-auth/registration/` thanks to the `dj-rest-auth` package
+- when an account is created with this method, the profile model will create a new profile record and link it to the profile via it's `pk`
 
-# Bugs
+### Profiles
+`/profiles` will return a list of all profiles in the Api database in the Profile table. Every profile is linked to a `User` record in the database and is done so immediately when a user is created.
+- items of the list returned are paginated in groups of `10`, this is to allow for data chunk and manageable sizing of payloads sent/requested from the front-end.
 
-### Resolved:
+data can be ordered on thie page as follows:
+- by posts_count (ascending/descending)
+- followers_count (ascending/descending)
+- following_count (ascending/descending)
+- comments_count (ascending/descending)
+- date a follow was created (ascending/descending)
+- date another user followed that profile (ascending/descending)
+
+data can be filtered by:
+- profiles a user has followed
+- profiles that are following the user
+
+A wide array of ordering/filters were predetermined in the backend to maximize functonality and verstility for growath of the front-end project in the long run.
+
+A search feature allows users to make a keyword search on all profiles in the table by `username`
+
+A `display_name` variable has been impletemented as there was going to originally be a display name in the original scope of the project, however, this is now out of scope. field remains in place for same reason as above
+
+Additional fields are generated using a serializer by incorporting data from other tables:
+- posts_count
+- followers_count 
+- following_count 
+- comments_count 
+- is_owner
+- following_id 
+
+`/profile/<:id>` allows for a detail view odf a single profile. using `generics` the record can be retreived or updated by form
+
+### posts
+`/posts` will return a list of all posts in the Api database in the Post table.
+
+data can be ordered on thie page as follows:
+- likes_count (ascending/descending)
+- comments_count (ascending/descending)
+
+data can be filtered by:
+- posts by a followed user
+- posts by user
+- posts user has liked
+- posts user has commented on
+
+A search feature allows users to make a keyword search on all posts in the table by `title` and `owner`
+
+Using the `generics` library, new posts can be created within the api with a simple form in the list view
+
+Additional fields are generated using a serializer by incorporting data from other tables:
+- is_owner
+- liked_id 
+- likes_count 
+- comments_count
+
+`/posts/<:id>` allows for a detail view of a single post. using `generics` the record can be retreived, updated by form or destroyed
+
+### comments
+`/comments` will return a list of all posts in the Api database in the Comment table.
+
+data can be ordered on thie page as follows:
+- votes_count (ascending/descending)
+- post (id) (ascending/descending)
+
+data can be filtered by:
+- comments by a user
+- comments by post
+- comments user has voted on
+
+A search feature allows users to make a keyword search on all comments in the table by `content` and `owner`
+
+Using the `generics` library, new comments can be created within the api with a simple form in the list view
+
+Additional fields are generated using a serializer by incorporting data from other tables:
+- profile_id
+- profile_image
+- post_title 
+- voted_on_id 
+- votes_count 
+- is_owner
+
+`/comments/<:id>` allows for a detail view of a single comment. using `generics` the record can be retreived, updated by form or destroyed.
+
+### follows
+`/follows` will return a list of all follow instances between profiles in the Api database in the Follow table.
+
+Additional fields are generated using a serializer by incorporting data from other tables:
+- owner_id
+- owner_image
+- followed_username
+- followed_user_image
+- is_owner
+
+Using the `generics` library, new follow instances can be created within the api with a simple form in the list view
+
+`/follows/<:id>` allows for a detail view of a single follow. using `generics` the record can be retreived, or destroyed
+
+the `UniqueConstraint` method is used to make sure that every follow instance created is unique, there can only be one of each type/combination of users
+
+### likes
+
+`/likes` will return a list of all like instances between a user and a post in the Api database in the Like table.
+
+data can be ordered by:
+- owner (ascending/descending)
+- post (ascending/descending)
+- post with most likes (ascending/descending)
+- post with most comments (ascending/descending)
+
+data can be filtered by:
+- post
+- owner
+
+Additional fields are generated using a serializer by incorporting data from other tables:
+- post_id
+- owner_id
+- owner_image
+- is_owner
+
+A search feature allows users to make a keyword search on all likes in the table by `owner` and `post`
+
+Using the `generics` library, new like instances can be created within the api with a simple form in the list view
+
+`/likes/<:id>` allows for a detail view of a single like. using `generics` the record can be retreived, or destroyed
+
+the `UniqueConstraint` method is used to make sure that every like instance created is unique, there can only be one of each type/combination of users and post
+
+### votes
+`/votes` will return a list of all votes instances between a user and a comment in the Api database in the Vote table.
+
+data can be ordered by:
+- owner (ascending/descending) 
+- comment (ascending/descending) 
+- number of votes on comment (ascending/descending) 
+
+data can be filtered by
+- user
+- post
+- comment
+
+Additional fields are generated using a serializer by incorporting data from other tables:
+- owner_id
+- owner_image
+- post
+- comment
+- is_owner
+
+A search feature allows users to make a keyword search on all votes in the table by `owner`, `post` and `comment`
+
+Using the `generics` library, new vote instances can be created within the api with a simple form in the list view
+
+the `UniqueConstraint` method is used to make sure that every vote instance created is unique, there can only be one of each type/combination of users and comment
+
+`/votes/<:id>` allows for a detail view of a single vote. using `generics` the record can be retreived, or destroyed
+
+___
+
+# Bugs 
+
+### Resolved bugs:
 Connection refused error when creating an account
 - User record would be created but not profile and an error would be thrown during authentication
 - added following code from stack overflow source and resolved issue. As email vericfication is mandatory this was changed to `True`
@@ -399,3 +571,12 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ```
 - [source](https://stackoverflow.com/questions/45006190/connectionrefusederror-in-django-rest-api-while-registration-process)
+
+### Unresolved Bugs:
+Like Model accidentally has 2 identical fields:
+- `post_id` serialized field produces identical result to `post` field. easy fix but there is not enough tie in this sprint to rectify
+
+
+
+Programs:
+- [Code Institute PEP8 Python Linter](https://pep8ci.herokuapp.com/#)
