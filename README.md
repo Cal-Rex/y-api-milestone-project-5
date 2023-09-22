@@ -25,7 +25,6 @@
 
 3. [FEATURES](#features)
 - [Design Features](#design-features)
-- [Features to Implement in Future](#features-to-implement-in-future)
 
 4. [BUGS](#bugs)
 - [Resolved Bugs](#resolved-bugs)
@@ -576,7 +575,63 @@ ACCOUNT_EMAIL_REQUIRED = True
 Like Model accidentally has 2 identical fields:
 - `post_id` serialized field produces identical result to `post` field. easy fix but there is not enough tie in this sprint to rectify
 
+____
 
+# Technologies
 
-Programs:
+## Languages / Frameworks
+- [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+- [Django](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django)
+- [Django Rest Framework](https://www.django-rest-framework.org/)
+
+### Libraries
+- dj-database-url
+- dj-rest-auth
+- django-allauth
+- django-cloudinary-storage
+- django-cors-headers
+- django-filter
+- djangorestframework-simplejwt
+- django-signals
+- gunicorn
+- Pillow
+- psycopg2
+
+### Services, Programs and Tools
+- GitHub
+- GitHub Projects
+- Heroku
+- Cloudinary
+- SQlite
+- ElephantSQL
+- Lucid
+- paint.net
 - [Code Institute PEP8 Python Linter](https://pep8ci.herokuapp.com/#)
+
+Credits:
+# Credits
+
+**references and troubleshooting resources**
+- Code Institute Django REST walkthrough tutorial
+
+**Tutors at the Code Institute:**
+- Sarah
+- Gemma
+- Joanne
+- Martin
+- Sean
+- Ed
+
+**Fellow CI Cohort members**
+- Cheryl
+- Eli
+- Adrian
+- Joe
+
+**Mentors:**
+- Jubril
+- Seun
+
+**Motivational Pets**
+- Kaiba
+- Layla
